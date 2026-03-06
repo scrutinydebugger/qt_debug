@@ -33,6 +33,7 @@ RUN apt-get update && apt-get install -y    \
     libxkbcommon-dev                        \
     libxkbcommon-x11-dev                    \
     libxrender-dev                          \
+    libzstd-dev                             \
     patchelf                                \
     python3                                 \
     python3-pip                             \
