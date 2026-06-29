@@ -10,16 +10,19 @@ OUTFOLDER="${WORKDIR}/pyside6-whl"
 
 cd pyside-setup
 
-python3 setup.py build   --qtpaths="${QTPATHS}" \
-                        --cmake=/usr/bin/cmake \
-                        --ignore-git \
-                        --debug \
-                        --verbose-build \
-                        --build-tests \
-                        --parallel=8 \
-                        --build-type=all \
-                        --module-subset=Core,Gui,Widgets,Charts,OpenGL,OpenGLWidgets \
-                        --standalone 
+args=""
+args+=" --qtpaths=${QTPATHS}"
+args+=" --cmake=/usr/local/bin/cmake"
+args+=" --debug"
+#args+=" --log-level=verbose"
+args+=" --no-qt-tools"
+args+=" --build-tests"
+args+=" --parallel=8"
+args+=" --build-type=all"
+args+=" --module-subset=Core,Gui,Widgets,Charts,OpenGL,OpenGLWidgets"
+args+=" --standalone"
+
+python3 setup.py build $args
 
 python3 create_wheels.py --build-dir=./build --no-examples
 rm -rf "$OUTFOLDER"

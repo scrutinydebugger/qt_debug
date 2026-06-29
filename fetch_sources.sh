@@ -6,10 +6,11 @@ cd $(dirname $0)
 
 WORKDIR="$(pwd)"
 PROJECTS="qtbase qtcharts qttools qtdeclarative"
-VERSION=6.9.0
+VERSION=6.11.1
 
 fetch(){
     PROJECT=$1
+    
     cd "$WORKDIR"
     if [ -d "$PROJECT" ]; then
         >&2 echo "Skipping $PROJECT"
