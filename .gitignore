@@ -1,0 +1,10 @@
+qt-ads-install
+qt-install
+qtbase 
+qtcharts 
+qttools 
+qtdeclarative
+venv*
+.ccache
+pyside6-whl
+pyside-setup

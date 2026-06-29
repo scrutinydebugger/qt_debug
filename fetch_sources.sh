@@ -6,26 +6,30 @@ cd $(dirname $0)
 
 WORKDIR="$(pwd)"
 PROJECTS="qtbase qtcharts qttools qtdeclarative"
-VERSION=6.11.1
+QT_VERSION=6.11.1
 
 fetch(){
     PROJECT=$1
+    URL=$2
+    TAG=$3
     
     cd "$WORKDIR"
     if [ -d "$PROJECT" ]; then
         >&2 echo "Skipping $PROJECT"
-        continue
+        return
     fi
-    git clone "https://github.com/qt/$PROJECT" -b $VERSION --depth=1
+    git clone "$URL" "$PROJECT" -b $TAG --depth=1
     cd "$PROJECT"
     git submodule update --init --recursive
     echo "$PROJECT fetched!"
 }
 
-git clone https://code.qt.io/pyside/pyside-setup -b $VERSION --depth 1 &
+fetch pyside-setup "https://code.qt.io/pyside/pyside-setup" $QT_VERSION&
 
 for PROJECT in $PROJECTS; do
-    fetch "$PROJECT" &
+    fetch $PROJECT "https://github.com/qt/$PROJECT" $QT_VERSION &
 done
+
+fetch "Qt-Advanced-Docking-System" "github.com/githubuser0xFFFF/Qt-Advanced-Docking-System" master &
 
 wait
